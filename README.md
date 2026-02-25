@@ -265,7 +265,7 @@ Run a multi-node test network on your local machine:
 
 **Terminal 1 - Start Coordinator:**
 ```bash
-saorsa-coordinator --verbose --bind 127.0.0.1:7000 --roles coordinator,reflector --publish-interval 10
+saorsa-gossip-coordinator --verbose --bind 127.0.0.1:7000 --roles coordinator,reflector --publish-interval 10
 ```
 
 **Terminal 2 - Start Second Coordinator:**
