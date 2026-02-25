@@ -116,7 +116,7 @@ Saorsa Gossip provides two production-ready binaries for testing and deployment:
 
 | Binary | Crate | Purpose |
 |--------|-------|---------|
-| `saorsa-gossip-coordinator` | [saorsa-coordinator](https://crates.io/crates/saorsa-coordinator) | Bootstrap/coordinator node for network discovery (alpha – adverts generated but not broadcast on the wire yet) |
+| `saorsa-gossip-coordinator` | [saorsa-gossip-coordinator](https://crates.io/crates/saorsa-gossip-coordinator) | Bootstrap/coordinator node for network discovery (alpha – adverts generated but not broadcast on the wire yet) |
 | `saorsa-gossip` | [saorsa-gossip](https://crates.io/crates/saorsa-gossip) | CLI tool for testing network features (alpha – commands are gradually being implemented) |
 
 > These binaries are still under heavy development. Use them for experimentation, not production deployments, until the remaining TODOs tracked in this README/DESIGN are resolved.
@@ -127,7 +127,7 @@ Install both binaries from crates.io:
 
 ```bash
 # Install coordinator binary (provides saorsa-gossip-coordinator command)
-cargo install saorsa-coordinator
+cargo install saorsa-gossip-coordinator
 
 # Install CLI tool (provides saorsa-gossip command)
 cargo install saorsa-gossip
@@ -141,7 +141,7 @@ git clone https://github.com/dirvine/saorsa-gossip.git
 cd saorsa-gossip
 
 # Build both binaries
-cargo build --release -p saorsa-coordinator -p saorsa-gossip
+cargo build --release -p saorsa-gossip-coordinator -p saorsa-gossip
 
 # Binaries available at:
 # - target/release/saorsa-gossip-coordinator
@@ -265,12 +265,12 @@ Run a multi-node test network on your local machine:
 
 **Terminal 1 - Start Coordinator:**
 ```bash
-saorsa-coordinator --verbose --bind 127.0.0.1:7000 --roles coordinator,reflector --publish-interval 10
+saorsa-gossip-coordinator --verbose --bind 127.0.0.1:7000 --roles coordinator,reflector --publish-interval 10
 ```
 
 **Terminal 2 - Start Second Coordinator:**
 ```bash
-saorsa-coordinator --verbose --bind 127.0.0.1:7001 --roles coordinator,relay --publish-interval 15 \
+saorsa-gossip-coordinator --verbose --bind 127.0.0.1:7001 --roles coordinator,relay --publish-interval 15 \
   --identity-path ~/.saorsa-gossip/coordinator2.identity
 ```
 
@@ -309,7 +309,7 @@ All binaries use structured logging with the `tracing` crate:
 **Enable verbose logging:**
 ```bash
 # For coordinator
-saorsa-coordinator --verbose ...
+saorsa-gossip-coordinator --verbose ...
 
 # For CLI tool
 saorsa-gossip --verbose identity create --alias Test
